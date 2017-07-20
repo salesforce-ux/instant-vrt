@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Instant VRT</title>
+  <link type="text/css" rel="stylesheet" href="/assets/styles/salesforce-lightning-design-system.css" />
+  <link rel="stylesheet" href="/virtualized/styles.css">
+<style>
+    iframe { width: 100%; outline: 0; border: 0; }
+    html {
+      background-color: #F0F0EF;
+    }
+    .app {
+      min-width: 64rem;
+      overflow: auto;
+    }
+    .app-header {
+      background-color: #394355;
+      color: #b0b8c9;
+    }
+    .app-header a {
+      color: #fff;
+    }
+    .logo {
+      color: #009DDC;
+      align-self: center;
+    }
+    .logo svg {
+      fill: currentColor;
+      width: 3.625rem;
+      height: 2.55rem;
+    }
+    .hover-popover:hover .slds-popover {
+      display: inline-block;
+    }
+    .diff {
+      width: 50%;
+      margin: auto;
+      position: relative;
+      margin-top: 1rem;
+      margin-bottom: 1rem;
+    }
+    .diff > div {
+      width: 100%;
+    }
+    .slds-image__title--card {
+      position: relative;
+    }
+    .slds-popover {
+      color: #16325c;
+    }
+    .toggle-code-changes {
+      position: absolute;
+      top: calc(0.25rem + 2px);
+      right: 0.5rem;
+    }
+</style>
+</head>
+<body>
+  <div id="react-target"></div>
+  <script src="/assets/scripts/bundle/app.js"></script>
+</body>
+</html>

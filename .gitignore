@@ -1,0 +1,28 @@
+# Ignore all hidden dotfiles
+.*
+
+# Whitelist useful dotfiles
+!/.babelrc
+!/.gitattributes
+!/.gitignore
+!/.travis.yml
+!/.eslintrc.yml
+!/.eslintignore
+!/.search_env
+!*.gitkeep
+
+# Ignore generated heroku download
+server/common/public/downloads/site.tgz
+
+# Ignore modules
+node_modules
+
+# Ignore logs
+*.log
+
+# Ignore snaps
+*.snap
+
+# Ignore db dumps
+*.rdb
+*.dump

@@ -1,0 +1,21 @@
+{
+  "name": "InstantVrt",
+  "version": "0.0.1",
+  "description": "Compares snaps",
+  "main": "index.js",
+  "dependencies": {
+    "fantasy-tuples": "^1.0.0",
+    "jquery": "^3.1.1",
+    "react-virtualized": "^9.7.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": ""
+  },
+  "homepage": ""
+}
