@@ -3,14 +3,14 @@
 const { assert } = require('chai')
 const path = require('path')
 
-const compare = require('../../server/vrt/compare')
-const report = require('../../server/vrt/report')
+const compare = require('../compare')
+const report = require('../report')
 
 describe('vrt/runners', () => {
   let results
 
   beforeEach(done => {
-    compare(path.resolve('test/vrt/123.test'), path.resolve('test/vrt/abc.test'))
+    compare(path.resolve(__dirname, '123.test'), path.resolve(__dirname, 'abc.test'))
     .fork(e => { throw e }, r => {
       results = r.map(report).toJS()
       done()

@@ -1,5 +1,6 @@
 const Task = require('data.task')
-const {readFile} = require('../common/pfs')
+const toTask = require('futurize').futurize(Task)
+const readFile = toTask(require('fs').readFile)
 const {List} = require('immutable-ext')
 const Either = require('data.either')
 const path = require('path')
@@ -19,7 +20,7 @@ const quickDiff = ({_1: ref, _2: candidate}) =>
   ref === candidate ? Success(empty) : Fail()
 
 const removeIds = line =>
-  line.replace(/id="(.*?)(\d+)"/, '')
+  line.replace(/(id)="(.*?)(\d+)"/, '')
 
 // failIfNotEq :: String -> String -> a -> Validation (List a) Null
 const failIfNotEq = (x, y, t) =>

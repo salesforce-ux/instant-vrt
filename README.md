@@ -1,12 +1,10 @@
 # Instant VRT
 
-<img src="https://portioncontrol.herokuapp.com/pie.png?size=250x250&performance=40&readabilty=60" alt="performance=40, readability=60" width=125 height=125 />
-
 VRT based on HTML and computed styles
 
 ## Installation
 
-See README in the root for instructions on running the archive server.
+`npm install @saleforce-ux/instant-vrt`
 
 ## How it works
 
@@ -40,4 +38,3 @@ Underneath is code. Html and style differences will show up in red.
 ## Feedback welcome
 
 Add your wishlist features and feedback here: https://salesforce.quip.com/lisVAZaQ2f8S
-

@@ -1,21 +1,31 @@
 {
-  "name": "InstantVrt",
-  "version": "0.0.1",
-  "description": "Compares snaps",
+  "name": "@salesforce-ux/instant-vrt",
+  "version": "0.0.2",
+  "description": "Compares files",
   "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
   "dependencies": {
+    "data.either": "^1.5.1",
+    "data.task": "^3.1.1",
     "fantasy-tuples": "^1.0.0",
-    "jquery": "^3.1.1",
-    "react-virtualized": "^9.7.3"
+    "futurize": "^1.2.0",
+    "immutable": "^3.8.1",
+    "immutable-ext": "^1.1.2"
   },
   "repository": {
     "type": "git",
     "url": ""
   },
   "author": "",
-  "license": "ISC",
+  "license": "",
   "bugs": {
     "url": ""
   },
-  "homepage": ""
+  "homepage": "",
+  "devDependencies": {
+    "chai": "^4.1.0",
+    "jest": "^20.0.4"
+  }
 }
