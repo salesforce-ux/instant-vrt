@@ -20,9 +20,6 @@ node_modules
 # Ignore logs
 *.log
 
-# Ignore snaps
-*.snap
-
 # Ignore db dumps
 *.rdb
 *.dump

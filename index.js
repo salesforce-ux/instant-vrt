@@ -1,5 +1,5 @@
-const compare = require('./compare')
-const report = require('./report')
+const runner = require('./packages/runner')
+const browser = require('./packages/browser')
+const matcher = require('./packages/matcher')
 
-module.exports = (testPath, refPath) =>
-  compare(testPath, refPath).map(files => files.map(report))
+module.exports = {runner, browser, matcher}

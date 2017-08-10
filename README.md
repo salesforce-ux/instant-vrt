@@ -1,40 +1,110 @@
 # Instant VRT
 
-VRT based on HTML and computed styles
+VRT based on HTML and computed styles.
 
 ## Installation
 
 `npm install @saleforce-ux/instant-vrt`
 
-## How it works
+# Writing a Test
 
-1. CI will build snapshots.json using https://github.com/salesforce-ux/create-snap and upload it to s3
-  * Renders each example in a headless browser
-  * Stores html and all computed styles for each example
+```js
+  it('snapshots the footer', () =>
+    browser
+    .getDOM('.landing__footer')
+    .then(dom => assertMatchesDOM('footer', dom))
+  )
+```
 
-2. The snapshots will be compared for differences in 3 ways. Style will not be checked if HTML is different.
-  * Checks for a difference on the file contents itself
-  * Any html differences
-  * Computed Style differences
+There are 2 parts:
+* `browser.getDOM('#mySelector')`
+* `assertMatchesDOM('snapshotName', dom)`
 
-## How to use it
+The runner works with any test framework (jest, mocha, tape), but it depends on
+`selenium-webdriver` to gather the DOM.
 
-### Load up the page
-Visit https://vrt.lightningdesignsystem.com/report/{SHA1}/{SHA2}. It currently takes a while due to the amount of examples, however, this is being addressed by removing the amount of examples and dynamically applying modifiers.
+You can use phantom, firefox, etc, but we recommend headless chrome. Here is an
+example of setup:
 
-### View the comparisons
-Each test is in an iframe rendering the actual code example.
+```js
+const getBrowser = () => {
+  const options = webdriver.Capabilities.chrome();
+  options.set('chromeOptions', { 'args': [ '--headless' ] })
+  const chrome = new webdriver.Builder().forBrowser('chrome').withCapabilities(options)
+  return decorate(chrome.build()) // decorate the browser with the getDOM function
+}
+```
 
-<img src="docs/example1.png" alt="example of iframes next to each other" width="200px"/>
+If you don't want to decorate, the package also exposes the getDOM function directly
+It is curried to take a browser:
 
-There is a "Show Diff" button that will lay one image on top of the other and apply a filter + 50% opacity. This has the effect of highlighting anything that is different. It will be 100% grey if there is no visual difference.
+```js
+const getDOM = browser => selector => /*...*/`
+```
 
-<img src="docs/example2.png" alt="example of Show Diff button pressed with filter applied" width="200px" />
+# Full Example
 
-Underneath is code. Html and style differences will show up in red.
+```js
+const express = require('express')
+const chromedriver = require('chromedriver')
+const webdriver = require('selenium-webdriver')
+const By = webdriver.By
+const until = webdriver.until
+const path = require('path')
 
-<img src="docs/example3.png" alt="example of code color highlighting" width="200px" />
+// if you don't want to decorate, this also exposes the getDOM function
+const {decorate} = require('@salesforce-ux/instant-vrt/browser')
+const {assertMatchesDOM} = require('@salesforce-ux/instant-vrt/matcher')
 
-## Feedback welcome
+// Set up an express server to serve our site
+const app = express()
+app.use(express.static(path.resolve(__dirname, '../.www')));
 
-Add your wishlist features and feedback here: https://salesforce.quip.com/lisVAZaQ2f8S
+// a helper function to setup webdriver
+const getBrowser = () => {
+  const options = webdriver.Capabilities.chrome();
+  options.set('chromeOptions', { 'args': [ '--headless' ] })
+  const chrome = new webdriver.Builder().forBrowser('chrome').withCapabilities(options)
+  return decorate(chrome.build())
+}
+
+describe('VRT', () => {
+  let server, browser
+
+  beforeAll((done) => {
+    server = app.listen(9000, done)
+    browser = getBrowser()
+    browser.manage().window().setSize(800, 600) // same window size is important
+  })
+
+  afterAll(() => {
+    server.close()
+    browser.quit()
+  })
+
+  describe('homepage', () => {
+    beforeEach((done) => {
+      browser.get('http://localhost:9000/')
+      browser.wait(browser.findElements(By.css('.landing__primary-nav')), 2000).then(() => done())
+    })
+
+    it('snapshots the top nav', () =>
+      browser
+      .getDOM('.landing__top-nav')
+      .then(dom => assertMatchesDOM('top nav', dom))
+    )
+
+    it('snapshots the side nav', () =>
+      browser
+      .getDOM('.landing__primary-nav')
+      .then(dom => assertMatchesDOM('side nav', dom))
+    )
+
+    it('snapshots the footer', () =>
+      browser
+      .getDOM('.landing__footer')
+      .then(dom => assertMatchesDOM('footer', dom))
+    )
+  })
+})
+```

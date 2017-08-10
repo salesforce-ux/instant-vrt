@@ -1,18 +1,15 @@
 {
   "name": "@salesforce-ux/instant-vrt",
-  "version": "0.0.2",
-  "description": "Compares files",
+  "version": "1.0.0",
+  "description": "Compares Dom",
   "main": "index.js",
   "scripts": {
     "test": "jest"
   },
   "dependencies": {
-    "data.either": "^1.5.1",
-    "data.task": "^3.1.1",
-    "fantasy-tuples": "^1.0.0",
-    "futurize": "^1.2.0",
-    "immutable": "^3.8.1",
-    "immutable-ext": "^1.1.2"
+    "callsite": "^1.0.0",
+    "chalk": "^2.1.0",
+    "js-beautify": "^1.6.14"
   },
   "repository": {
     "type": "git",
