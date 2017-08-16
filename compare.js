@@ -13,7 +13,7 @@ const stripComments = x =>
 const getHtmlFails = (testLines, refLines) =>
   refLines
   .map((line, i) =>
-    stripComments(testLines[i]) === stripComments(line) ? null : i
+    testLines[i] === line ? null : i
   )
   .filter(x => x)
 
@@ -21,7 +21,7 @@ const getStyleFails = (testStyle, refStyle) => {
   let fails = []
   for (i = 0; i < refStyle.length; i++) {
     for (k in refStyle[i]) {
-      if(testStyle[i][k] !== refStyle[i][k]) {
+      if(testStyle[i] && testStyle[i][k] !== refStyle[i][k]) {
         fails[i] = fails[i] || []
         fails[i].push(k)
       }
@@ -32,7 +32,7 @@ const getStyleFails = (testStyle, refStyle) => {
 const deserialize = x =>
   ({
     html: x.html,
-    htmlLines: x.html.split('\n'),
+    htmlLines: x.html.split('\n').map(stripComments),
     style: x.style.map(toObj)
   })
 

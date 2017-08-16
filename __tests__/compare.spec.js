@@ -36,4 +36,8 @@ describe('report', () => {
     const res = report(compare(tests["fail_style"], refs["fail_style"]))
     expect(res).toMatchSnapshot()
   })
+  it('is too different', () => {
+    const res = report(compare(tests["tooDifferent"], refs["tooDifferent"]))
+    expect(res).toMatchSnapshot()
+  })
 })

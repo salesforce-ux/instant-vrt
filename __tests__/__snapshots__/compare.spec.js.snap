@@ -1,8 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`report is too different 1`] = `
+Object {
+  "html": "",
+  "style": "33 failures
+Too many failures to show",
+}
+`;
+
 exports[`report shows the html output 1`] = `
 Object {
-  "html": "Failed on lines: 3
+  "html": "1 failures
   <header class=\\"site site-masthead slds-grid slds-wrap\\">
 [31m    <div class=\\"site-masthead-title slds-has-flexi-truncate slds-align-middle\\">[39m
 [32m    <div alt=\\"FAIL\\" class=\\"site-masthead-title slds-has-flexi-truncate slds-align-middle\\">[39m
@@ -14,7 +22,7 @@ Object {
 exports[`report shows the style output 1`] = `
 Object {
   "html": "",
-  "style": "Failed on lines: 0, 3
+  "style": "2 failures
 <main class=\\"site-main slds-order_1\\" role=\\"main\\" id=\\"content\\">
 {
 border-bottom-color: [31mrgb(22, 50, 92)[39m [32mrgb(22, 666, 92),[39m

@@ -11,7 +11,8 @@ const html = result => {
   const refLines = result.ref.htmlLines
 
   return result.html.map(lineNumber => {
-    return [ testLines[lineNumber - 1],
+    return [
+      testLines[lineNumber - 1],
       chalk.red(testLines[lineNumber]),
       chalk.green(refLines[lineNumber]),
       testLines[lineNumber + 1]
@@ -42,12 +43,17 @@ const style = result =>
   result.style.map(styleDiff(result, {})).filter(x => x).join('\n')
 
 const showLines = lines =>
-  lines.length ? `Failed on lines: ${lines.join(', ')}\n` : ''
+  lines.length ? `${lines.length} failures\n` : ''
+
+const guardTooMany = (n, f) =>
+  n < 15 ? f() : 'Too many failures to show'
 
 const Report = result =>
   ({
-    html: showLines(result.html).concat(html(result)),
-    style: showLines(result.style.map((x, i) => i).filter(x => x != null)).concat(style(result))
+    html: showLines(result.html)
+          .concat(guardTooMany(result.html.length, () => html(result))),
+    style: showLines(result.style.map((x, i) => i).filter(x => x != null))
+          .concat(guardTooMany(result.style.length, () => style(result)))
   })
 
 module.exports = Report
