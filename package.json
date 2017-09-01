@@ -1,13 +1,12 @@
 {
   "name": "@salesforce-ux/instant-vrt",
-  "version": "1.0.1",
+  "version": "1.1.1",
   "description": "Compares Dom",
   "main": "index.js",
   "scripts": {
     "test": "jest"
   },
   "dependencies": {
-    "callsite": "^1.0.0",
     "chalk": "^2.1.0",
     "js-beautify": "^1.6.14"
   },

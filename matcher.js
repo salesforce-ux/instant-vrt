@@ -2,7 +2,6 @@ const fs = require('fs')
 const path = require('path')
 const compare = require('./compare');
 const report = require('./report');
-const callsite = require('callsite');
 
 const ensureDirectory = dir =>
   fs.existsSync(dir) ? dir : fs.mkdirSync(dir)
@@ -41,10 +40,7 @@ const loadAndWriteOrCompareVrt = (dir, name, dom) => {
   }
 }
 
-const assertMatchesDOM = (name, dom) => {
-  const stack = callsite()
-  const requester = stack[1].getFileName()
-  const dir = path.dirname(requester)
+const assertMatchesDOM = (dir, name, dom) => {
   const result = loadAndWriteOrCompareVrt(dir, name, dom)
   if(!result.pass) {
     throw(new Error(result.message))
