@@ -25,7 +25,8 @@ const ifNotInCache = (cache, key, f) =>
   ? null
   : cache[key] = f()
 
-const styleLine = (fail, refStyle, testStyle) =>
+// I flipped these args on purpose. I can't figure out the bug, but the print correctly this way.
+const styleLine = (fail, testStyle, refStyle) =>
   Object.keys(refStyle).map(k =>
     fail.indexOf(k) >= 0
     ? [`${k}:`, chalk.red(refStyle[k]), chalk.green(`${testStyle[k]},\n`)].join(' ')

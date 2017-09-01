@@ -2,7 +2,11 @@
 
 exports[`report is too different 1`] = `
 Object {
-  "html": "",
+  "html": "1 failures
+
+[31m<main class=\\"site-main slds-order_1\\" role=\\"main\\" id=\\"content\\">[39m
+[32m<div>Extra Element</div><main class=\\"site-main slds-order_1\\" role=\\"main\\" id=\\"content\\">[39m
+  ",
   "style": "33 failures
 Too many failures to show",
 }
@@ -25,11 +29,11 @@ Object {
   "style": "2 failures
 <main class=\\"site-main slds-order_1\\" role=\\"main\\" id=\\"content\\">
 {
-border-bottom-color: [31mrgb(22, 50, 92)[39m [32mrgb(22, 666, 92),[39m
+border-bottom-color: [31mrgb(22, 666, 92)[39m [32mrgb(22, 50, 92),[39m
 [32m[39m}
 <span class=\\"slds-hide docsearch-category\\">
 {
-display: [31mvisible[39m [32mnone,[39m
+display: [31mnone[39m [32mvisible,[39m
 [32m[39m}",
 }
 `;

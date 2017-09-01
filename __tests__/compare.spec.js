@@ -9,6 +9,28 @@ const compare = require('../compare')
 const report = require('../report')
 
 describe('compare', () => {
+  it('passes on a 1 liner ', () => {
+    const test = {html: '<span>hey</span>', style: ['color: red;']}
+    const ref = {html: '<span>hey</span>', style: ['color: red;']}
+    const res = compare(test, ref)
+    assert.equal(res.passed, true)
+  })
+  it('fails style on a 1 liner ', () => {
+    const test = {html: '<span>hey</span>', style: ['color: red;']}
+    const ref = {html: '<span>hey</span>', style: ['color: blue;']}
+    const res = compare(test, ref)
+    assert.equal(res.passed, false)
+    assert.equal(report(res).html.length, 0)
+    assert.equal(report(res).style.length > 0, true)
+  })
+  it('fails html on a 1 liner ', () => {
+    const test = {html: '<span>hey</span>', style: ['color: red;']}
+    const ref = {html: '<span>different</span>', style: ['color: red;']}
+    const res = compare(test, ref)
+    assert.equal(res.passed, false)
+    assert.equal(report(res).html.length > 0, true)
+    assert.equal(report(res).style.length, 0)
+  })
   it('passes', () => {
     const res = compare(tests["passing"], refs["passing"])
     assert.equal(res.passed, true)

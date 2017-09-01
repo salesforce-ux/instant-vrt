@@ -15,7 +15,7 @@ const getHtmlFails = (testLines, refLines) =>
   .map((line, i) =>
     testLines[i] === line ? null : i
   )
-  .filter(x => x)
+  .filter(x => x != null)
 
 const getStyleFails = (testStyle, refStyle) => {
   let fails = []
