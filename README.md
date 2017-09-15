@@ -2,6 +2,9 @@
 
 VRT based on HTML and computed styles.
 
+![vrt-example](output.png
+"Vrt Output")
+
 ## Installation
 
 `npm install @saleforce-ux/instant-vrt`
