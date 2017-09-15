@@ -2,8 +2,7 @@
 
 VRT based on HTML and computed styles.
 
-![vrt-example](output.png
-"Vrt Output")
+<img alt="test output" src="output.png" width="600px" />
 
 ## Installation
 
