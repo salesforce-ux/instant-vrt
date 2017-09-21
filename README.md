@@ -2,7 +2,7 @@
 
 VRT based on HTML and computed styles.
 
-<img alt="test output" src="output.png" width="600px" />
+<img alt="test output" src="docs/output.png" width="600px" />
 
 ## Installation
 
@@ -20,7 +20,7 @@ VRT based on HTML and computed styles.
 
 There are 2 parts:
 * `browser.getDOM('#mySelector')`
-* `assertMatchesDOM('snapshotName', dom)`
+* `assertMatchesDOM(__dirname, 'snapshotName', dom)`
 
 The runner works with any test framework (jest, mocha, tape), but it depends on
 `selenium-webdriver` to gather the DOM.
@@ -93,19 +93,19 @@ describe('VRT', () => {
     it('snapshots the top nav', () =>
       browser
       .getDOM('.landing__top-nav')
-      .then(dom => assertMatchesDOM('top nav', dom))
+      .then(dom => assertMatchesDOM(__dirname, 'top nav', dom))
     )
 
     it('snapshots the side nav', () =>
       browser
       .getDOM('.landing__primary-nav')
-      .then(dom => assertMatchesDOM('side nav', dom))
+      .then(dom => assertMatchesDOM(__dirname, 'side nav', dom))
     )
 
     it('snapshots the footer', () =>
       browser
       .getDOM('.landing__footer')
-      .then(dom => assertMatchesDOM('footer', dom))
+      .then(dom => assertMatchesDOM(__dirname, 'footer', dom))
     )
   })
 })

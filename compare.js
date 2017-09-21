@@ -1,10 +1,14 @@
 const quickDiff = (x, y) =>
   JSON.stringify(x) === JSON.stringify(y)
 
+// now we could parse and round here, but taking the first dec should suffice. #famouslastwords
+const removeFloat = x =>
+  x.replace(/(\d+)\.(\d+)px/ig, (x, y, z) => `${y}.${z.slice(0, 1)}px`)
+
 const toObj = str =>
   str.split('; ').reduce((acc, s) => {
     const [k, v] = s.split(': ')
-    return k ? Object.assign(acc, {[k]: v}) : acc
+    return k ? Object.assign(acc, {[k]: removeFloat(v)}) : acc
   }, {})
 
 const stripComments = x =>
