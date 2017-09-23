@@ -37,7 +37,7 @@ const deserialize = x =>
   ({
     html: x.html,
     htmlLines: x.html.split('\n').map(stripComments),
-    style: x.style.map(toObj)
+    style: x.style.map(s => typeof s === "string" ? toObj(s) : s) // legacy snaps
   })
 
 const Result = (test, ref, html, style, passed) =>
