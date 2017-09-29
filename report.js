@@ -47,7 +47,7 @@ const showLines = lines =>
   lines.length ? `${lines.length} failures\n` : ''
 
 const guardTooMany = (n, f) =>
-  n < 15 ? f() : 'Too many failures to show'
+  n < 500 ? f() : 'Too many failures to show'
 
 const Report = result =>
   ({
