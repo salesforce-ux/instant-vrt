@@ -52,6 +52,11 @@ describe("compare", () => {
     const res = compare(tests["superClose"], refs["superClose"]);
     assert.equal(res.passed, true);
   });
+
+  it("takes an array of ignore props", () => {
+    const res = compare(tests["ignored"], refs["ignored"], new Set(['animation-direction']));
+    assert.equal(res.passed, true);
+  });
 });
 
 describe("report", () => {
@@ -64,7 +69,7 @@ describe("report", () => {
     expect(res).toMatchSnapshot();
   });
   it("is too different", () => {
-    const res = report(compare(tests["tooDifferent"], refs["tooDifferent"]));
+    const res = report(compare(tests["tooDifferent"], refs["tooDifferent"]), 30);
     expect(res).toMatchSnapshot();
   });
 });

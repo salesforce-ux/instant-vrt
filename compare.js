@@ -21,11 +21,11 @@ const getHtmlFails = (testLines, refLines) =>
   )
   .filter(x => x != null)
 
-const getStyleFails = (testStyle, refStyle) => {
+const getStyleFails = (testStyle, refStyle, ignore) => {
   let fails = []
   for (i = 0; i < refStyle.length; i++) {
     for (k in refStyle[i]) {
-      if(testStyle[i] && testStyle[i][k] !== refStyle[i][k]) {
+      if(!ignore.has(k) && testStyle[i] && testStyle[i][k] !== refStyle[i][k]) {
         fails[i] = fails[i] || []
         fails[i].push(k)
       }
@@ -43,12 +43,12 @@ const deserialize = x =>
 const Result = (test, ref, html, style, passed) =>
   ({ test, ref, html, style, passed })
 
-module.exports = (test_, ref_) => {
+module.exports = (test_, ref_, ignore=new Set()) => {
   const test = deserialize(test_)
   const ref = deserialize(ref_)
   if (quickDiff(test_, ref_)) return Result(test, ref, [], [], true)
   const htmlFails = test.html === ref.html ? [] : getHtmlFails(test.htmlLines, ref.htmlLines)
-  const styleFails = test_.style === ref_.style ? [] : getStyleFails(test.style, ref.style)
+  const styleFails = test_.style === ref_.style ? [] : getStyleFails(test.style, ref.style, ignore)
   const passed = (htmlFails.length + styleFails.length) === 0
   return Result(test, ref, htmlFails, styleFails, passed)
 }

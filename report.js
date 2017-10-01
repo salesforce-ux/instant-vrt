@@ -46,15 +46,15 @@ const style = result =>
 const showLines = lines =>
   lines.length ? `${lines.length} failures\n` : ''
 
-const guardTooMany = (n, f) =>
-  n < 500 ? f() : 'Too many failures to show'
+const guardTooMany = (threshold, n, f) =>
+  n < threshold ? f() : 'Too many failures to show'
 
-const Report = result =>
+const Report = (result, threshold=400) =>
   ({
     html: showLines(result.html)
-          .concat(guardTooMany(result.html.length, () => html(result))),
+          .concat(guardTooMany(threshold, result.html.length, () => html(result))),
     style: showLines(result.style.map((x, i) => i).filter(x => x != null))
-          .concat(guardTooMany(result.style.length, () => style(result)))
+          .concat(guardTooMany(threshold, result.style.length, () => style(result)))
   })
 
 module.exports = Report
