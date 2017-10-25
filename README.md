@@ -110,3 +110,7 @@ describe('VRT', () => {
   })
 })
 ```
+
+## Licenses
+
+Source code is licensed under [BSD 3-Clause](https://git.io/sfdc-license)
