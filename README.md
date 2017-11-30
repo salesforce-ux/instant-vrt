@@ -6,7 +6,7 @@ VRT based on HTML and computed styles.
 
 ## Installation
 
-`npm install @saleforce-ux/instant-vrt`
+`npm install @salesforce-ux/instant-vrt`
 
 # Writing a Test
 
