@@ -1,6 +1,6 @@
 # Instant VRT
 
-VRT based on HTML and computed styles.
+Visual regression testing based on HTML and computed styles.
 
 <img alt="test output" src="docs/output.png" width="600px" />
 
