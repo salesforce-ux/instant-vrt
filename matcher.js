@@ -25,15 +25,14 @@ const tryRequire = filePath => {
 const message = ({html, style}) =>
   [html, style].filter(x => x).join('\n')
 
-const loadAndWriteOrCompareVrt = (dir, name, dom) => {
-  const shouldUpdate = process.argv.filter(x => x === '-u')[0]
-  ensureDirectory(SNAP_DIR(dir))
+const loadAndWriteOrCompareVrt = ({ directory, dom, name, update = false }) => {
+  ensureDirectory(SNAP_DIR(directory))
   const desc = 'snapshot' // future thinking?
-  const snapPath = path.resolve(SNAP_DIR(dir), getSnapPath(name))
+  const snapPath = path.resolve(SNAP_DIR(directory), getSnapPath(name))
   const file = tryRequire(snapPath) || {}
   const contents = file[desc]
 
-  if(!shouldUpdate && contents) {
+  if(!update && contents) {
     const result = compare(contents, dom)
     return {pass: result.passed, message: message(report(result))}
   } else {
@@ -43,8 +42,8 @@ const loadAndWriteOrCompareVrt = (dir, name, dom) => {
   }
 }
 
-const assertMatchesDOM = (dir, name, dom) => {
-  const result = loadAndWriteOrCompareVrt(dir, name, dom)
+const assertMatchesDOM = (options) => {
+  const result = loadAndWriteOrCompareVrt(options)
   if(!result.pass) {
     throw(new Error(result.message))
   }
