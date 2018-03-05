@@ -14,13 +14,13 @@ Visual regression testing based on HTML and computed styles.
   it('snapshots the footer', () =>
     browser
     .getDOM('.landing__footer')
-    .then(dom => assertMatchesDOM('footer', dom))
+    .then(dom => assertMatchesDOM({ directory: __dirname, name: 'footer', dom }))
   )
 ```
 
 There are 2 parts:
 * `browser.getDOM('#mySelector')`
-* `assertMatchesDOM(__dirname, 'snapshotName', dom)`
+* `assertMatchesDOM({ directory: __dirname, name: 'snapshotName', dom: dom, update: false })`
 
 The runner works with any test framework (jest, mocha, tape), but it depends on
 `selenium-webdriver` to gather the DOM.
@@ -93,19 +93,19 @@ describe('VRT', () => {
     it('snapshots the top nav', () =>
       browser
       .getDOM('.landing__top-nav')
-      .then(dom => assertMatchesDOM(__dirname, 'top nav', dom))
+      .then(dom => assertMatchesDOM({ directory: __dirname, name: 'top nav', dom }))
     )
 
     it('snapshots the side nav', () =>
       browser
       .getDOM('.landing__primary-nav')
-      .then(dom => assertMatchesDOM(__dirname, 'side nav', dom))
+      .then(dom => assertMatchesDOM({ directory: __dirname, name: 'side nav', dom }))
     )
 
     it('snapshots the footer', () =>
       browser
       .getDOM('.landing__footer')
-      .then(dom => assertMatchesDOM(__dirname, 'footer', dom))
+      .then(dom => assertMatchesDOM({ directory: __dirname, name: 'footer', dom }))
     )
   })
 })
