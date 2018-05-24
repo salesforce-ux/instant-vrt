@@ -1,6 +1,8 @@
 # Instant VRT
 
-Visual regression testing based on HTML and computed styles.
+Visual regression testing based on HTML and computed styles. 
+
+Image processing can take time and Git may not be the best place to store binary files. Instead of pixel comparisons of images stored within your source code, this library stores the computed styles of every HTML node which allows you to compare versions with a text comparison instead of a pixel comparison. You can theoretically build out the original with the stored computed styles, too, and do a pixel comparison if needed.
 
 <img alt="test output" src="docs/output.png" width="600px" />
 
